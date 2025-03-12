@@ -21,16 +21,16 @@ class FilmControllerTest {
                 "\"releaseDate\":\"1946-08-20\"," + " \"duration\":120}");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request =new HttpEntity<>(filmJson, headers);
-        ResponseEntity<String> response= restTemplate.exchange("/films", HttpMethod.POST, request,
+        HttpEntity<String> request = new HttpEntity<>(filmJson, headers);
+        ResponseEntity<String> response = restTemplate.exchange("/films", HttpMethod.POST, request,
                 String.class);
         assertEquals(500, response.getStatusCodeValue());
         filmJson = ("{\"id\":1, \"description\":\"film description\", \"releaseDate\":\"1946-08-20\"," +
                 " \"duration\":120}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        request =new HttpEntity<>(filmJson, headers);
-        response= restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
+        request = new HttpEntity<>(filmJson, headers);
+        response = restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
         assertEquals(500, response.getStatusCodeValue());
         filmJson = ("{\"id\":1, \"name\":\"film\", \"description\":\"film descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
                 "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
@@ -38,28 +38,28 @@ class FilmControllerTest {
                 " \"duration\":120}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        request =new HttpEntity<>(filmJson, headers);
-        response= restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
+        request = new HttpEntity<>(filmJson, headers);
+        response = restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
         assertEquals(500, response.getStatusCodeValue());
         filmJson = ("{\"id\":1, \"name\":\"film\", \"description\":\"film description\", " +
                 "\"releaseDate\":\"1846-08-20\", \"duration\":120}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        request =new HttpEntity<>(filmJson, headers);
-        response= restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
+        request = new HttpEntity<>(filmJson, headers);
+        response = restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
         assertEquals(500, response.getStatusCodeValue());
         filmJson = ("{\"id\":1, \"name\":\"film\", \"description\":\"film description\", " +
                 "\"releaseDate\":\"1946-08-20\", \"duration\":0}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        request =new HttpEntity<>(filmJson, headers);
-        response= restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
+        request = new HttpEntity<>(filmJson, headers);
+        response = restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
         assertEquals(500, response.getStatusCodeValue());
         filmJson = ("{}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        request =new HttpEntity<>(filmJson, headers);
-        response= restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
+        request = new HttpEntity<>(filmJson, headers);
+        response = restTemplate.exchange("/films", HttpMethod.POST, request, String.class);
         assertEquals(500, response.getStatusCodeValue());
     }
 
@@ -102,7 +102,7 @@ class FilmControllerTest {
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         request = new HttpEntity<>(filmJson, headers);
-        response= restTemplate.exchange("/films", HttpMethod.PUT, request, String.class);
+        response = restTemplate.exchange("/films", HttpMethod.PUT, request, String.class);
         assertEquals(500, response.getStatusCodeValue());
         filmJson = ("{}");
         headers = new HttpHeaders();

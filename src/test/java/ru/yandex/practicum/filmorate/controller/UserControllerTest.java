@@ -66,8 +66,8 @@ class UserControllerTest {
                 " \"birthday\":\"1946-08-20\"}");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity =new HttpEntity<>(userJson, headers);
-        ResponseEntity<String> response= restTemplate.exchange("/users", HttpMethod.POST, entity,
+        HttpEntity<String> entity = new HttpEntity<>(userJson, headers);
+        ResponseEntity<String> response = restTemplate.exchange("/users", HttpMethod.POST, entity,
                 String.class);
         assertEquals(200, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"userexample.com\", \"login\":\"dolore\", \"name\":\"User Name\"," +

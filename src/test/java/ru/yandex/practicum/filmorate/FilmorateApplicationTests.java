@@ -19,8 +19,8 @@ class FilmorateApplicationTests {
 				" \"birthday\":\"1946-08-20\"}");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request =new HttpEntity<>(userJson, headers);
-		ResponseEntity<String> response= restTemplate.exchange("/users", HttpMethod.POST, request,
+		HttpEntity<String> request = new HttpEntity<>(userJson, headers);
+		ResponseEntity<String> response = restTemplate.exchange("/users", HttpMethod.POST, request,
 				String.class);
         assertEquals(200, response.getStatusCodeValue());
 		String body = response.getBody();
@@ -31,7 +31,7 @@ class FilmorateApplicationTests {
 		assertTrue(body.contains("\"birthday\":\"1946-08-20\""));
 		userJson = ("{\"id\":1, \"email\":\"user2@example.com\", \"login\":\"dolore2\", \"name\":\"User Name2\"," +
                 " \"birthday\":\"1946-08-20\"}");
-        request =new HttpEntity<>(userJson, headers);
+        request = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT,request, String.class);
         assertEquals(200, response.getStatusCodeValue());
         body = response.getBody();
@@ -59,8 +59,8 @@ class FilmorateApplicationTests {
 				"\"releaseDate\":\"1946-08-20\", \"duration\":120}");
         HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request =new HttpEntity<>(filmJson, headers);
-		ResponseEntity<String> response= restTemplate.exchange("/films", HttpMethod.POST, request,
+		HttpEntity<String> request = new HttpEntity<>(filmJson, headers);
+		ResponseEntity<String> response = restTemplate.exchange("/films", HttpMethod.POST, request,
 				String.class);
 		assertEquals(200, response.getStatusCodeValue());
 		String body = response.getBody();
@@ -71,7 +71,7 @@ class FilmorateApplicationTests {
         assertTrue(body.contains("\"duration\":120"));
         filmJson = ("{\"id\":1, \"name\":\"film2\", \"description\":\"film description2\", \"releaseDate\":\"1946-08-20\"," +
                 " \"duration\":120}");
-        request =new HttpEntity<>(filmJson, headers);
+        request = new HttpEntity<>(filmJson, headers);
         response = restTemplate.exchange("/films", HttpMethod.PUT,request, String.class);
         assertEquals(200, response.getStatusCodeValue());
         body = response.getBody();

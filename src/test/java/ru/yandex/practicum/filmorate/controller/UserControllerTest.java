@@ -103,6 +103,6 @@ class UserControllerTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(500, response.getStatusCodeValue()); //этот коммит нужен, чтобы гит увидел изменения
     }
 }

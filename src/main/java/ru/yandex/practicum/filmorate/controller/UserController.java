@@ -7,7 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.yandex.practicum.filmorate.model.User;
 import lombok.extern.slf4j.Slf4j;
 import ru.yandex.practicum.filmorate.service.UserService;
-import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import java.util.Collection;
 import java.util.Set;
@@ -17,7 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
-    private final InMemoryUserStorage userStorage;
+    private final UserStorage userStorage;
     private final UserService userService;
 
     @GetMapping

@@ -2,11 +2,14 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -17,6 +20,26 @@ import java.util.Set;
 public class UserService {
     private final InMemoryUserStorage userStorage;
 
+    public Collection<User> findAll() {
+        log.trace("Запущен метод поиска пользователя");
+        return userStorage.findAll();
+    }
+
+    public User findById(Long id) {
+        log.trace("Запущен метод поиска пользователя по id");
+        return userStorage.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь не найден"));
+    }
+
+    public User create(User user) {
+        log.trace("Запущен метод создания пользователя");
+        return userStorage.create(user);
+    }
+
+    public User update(User newUser) {
+        log.trace("Запущен метод обновления пользователя");
+        return userStorage.update(newUser);
+    }
 
     public void addFriend(Long userId, Long friendId) {
         log.trace("Запущен метод добавления друга пользователя");

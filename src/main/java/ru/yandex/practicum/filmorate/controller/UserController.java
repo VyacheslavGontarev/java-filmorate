@@ -7,7 +7,6 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.yandex.practicum.filmorate.model.User;
 import lombok.extern.slf4j.Slf4j;
 import ru.yandex.practicum.filmorate.service.UserService;
-import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import java.util.Collection;
 import java.util.Set;
@@ -17,33 +16,31 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
-    private final UserStorage userStorage;
     private final UserService userService;
 
     @GetMapping
     public Collection<User> findAll() {
         log.trace("Запущен метод поиска пользователя");
-        return userStorage.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
     public User findById(@PathVariable Long id) {
 
         log.trace("Запущен метод поиска пользователя по id");
-        return userStorage.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь не найден"));
+        return userService.findById(id);
     }
 
     @PostMapping
     public User create(@RequestBody User user) {
         log.trace("Запущен метод создания пользователя");
-        return userStorage.create(user);
+        return userService.create(user);
     }
 
     @PutMapping
     public User update(@RequestBody User newUser) {
         log.trace("Запущен метод обновления пользователя");
-        return userStorage.update(newUser);
+        return userService.update(newUser);
     }
 
     @PutMapping("/{userId}/friends/{friendId}")

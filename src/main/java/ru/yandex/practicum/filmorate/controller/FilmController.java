@@ -2,12 +2,9 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,32 +15,30 @@ import java.util.List;
 @RequestMapping("/films")
 @Slf4j
 public class FilmController {
-    private final FilmStorage filmStorage;
     private final FilmService filmService;
 
     @GetMapping
     public Collection<Film> findAll() {
         log.trace("Запущен метод поиска фильмов");
-        return filmStorage.findAll();
+        return filmService.findAll();
     }
 
     @GetMapping("/{id}")
     public Film findById(@PathVariable Long id) {
         log.trace("Запущен метод поиска фильма по id");
-        return filmStorage.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь не найден"));
+        return filmService.findById(id);
     }
 
     @PostMapping
     public Film create(@RequestBody Film film) {
         log.trace("Запущен метод создания фильма");
-        return filmStorage.create(film);
+        return filmService.create(film);
     }
 
     @PutMapping
     public Film update(@RequestBody Film newFilm) {
         log.trace("Запущен метод обновления фильма");
-       return filmStorage.update(newFilm);
+       return filmService.update(newFilm);
     }
 
     @PutMapping("/{filmId}/like/{userId}")

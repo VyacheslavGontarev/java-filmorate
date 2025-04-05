@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 import ru.yandex.practicum.filmorate.controller.serializer.DurationSerializer;
 
-/**
- * Film.
- */
 @Data
 public class Film {
     private Long id;
@@ -17,6 +17,7 @@ public class Film {
     private LocalDate releaseDate;
     @JsonSerialize(using = DurationSerializer.class)
     Duration duration;
+    private Set<Long> likes = new HashSet<>();
 
     public Film(Long id, String name, String description, LocalDate releaseDate, Duration duration) {
         this.id = id;

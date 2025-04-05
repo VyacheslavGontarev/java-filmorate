@@ -23,41 +23,41 @@ class UserControllerTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(userJson, headers);
         ResponseEntity<String> response = restTemplate.exchange("/users", HttpMethod.POST, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"userexample.com\", \"login\":\"dolore\", \"name\":\"User Name\"," +
                         " \"birthday\":\"1946-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.POST, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"user@example.com\", \"name\":\"User Name\"," +
                         " \"birthday\":\"1946-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.POST, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"user@example.com\", \"login\":\"dol ore\", \"name\":\"User Name\"," +
                         " \"birthday\":\"1946-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.POST, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"user@example.com\", \"login\":\"dolore\", \"name\":\"User Name\"," +
                         " \"birthday\":\"2026-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.POST, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.POST, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
     }
 
     @Test
@@ -76,33 +76,33 @@ class UserControllerTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"user@example.com\", \"login\":\"dol ore\", \"name\":\"User Name\"," +
                 " \"birthday\":\"1946-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"id\":1, \"email\":\"user@example.com\", \"login\":\"dolore\", \"name\":\"User Name\"," +
                 " \"birthday\":\"2026-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCodeValue());
         userJson = ("{\"email\":\"user@example.com\", \"login\":\"dolore\", \"name\":\"User Name\"," +
                 " \"birthday\":\"2026-08-20\"}");
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         entity = new HttpEntity<>(userJson, headers);
         response = restTemplate.exchange("/users", HttpMethod.PUT, entity, String.class);
-        assertEquals(500, response.getStatusCodeValue()); //этот коммит нужен, чтобы гит увидел изменения
+        assertEquals(400, response.getStatusCodeValue());
     }
 }

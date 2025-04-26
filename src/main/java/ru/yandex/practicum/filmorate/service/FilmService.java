@@ -8,18 +8,19 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.film.InMemoryFilmStorage;
-import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.LikeDbStorage;
+import ru.yandex.practicum.filmorate.storage.film.FilmDbStorage;
+import ru.yandex.practicum.filmorate.storage.user.UserDbStorage;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class FilmService {
-    private final InMemoryFilmStorage filmStorage;
-    private final InMemoryUserStorage userStorage;
+    private final FilmDbStorage filmStorage;
+    private final UserDbStorage userStorage;
+    private final LikeDbStorage likeStorage;
 
 
     public Collection<Film> findAll() {
@@ -50,8 +51,7 @@ public class FilmService {
         if (mayBeFilm.isEmpty() || mayBeUser.isEmpty()) {
             throw new NotFoundException("Фильм или пользователь не найдены.");
         }
-        Film film = mayBeFilm.get();
-        film.getLikes().add(userId);
+        likeStorage.addLike(filmId, userId);
     }
 
     public void removeLike(Long filmId, Long userId) {
@@ -61,19 +61,11 @@ public class FilmService {
         if (mayBeFilm.isEmpty() || mayBeUser.isEmpty()) {
             throw new NotFoundException("Фильм или пользователь не найдены.");
         }
-        Film film = mayBeFilm.get();
-        if (film.getLikes().contains(userId)) {
-            film.getLikes().remove(userId);
-        } else {
-            throw new NotFoundException("Лайк пользователя не найден.");
-        }
+        likeStorage.removeLike(filmId, userId);
     }
 
-    public List<Film> getTopFilms(int count) {
-        log.trace("Запущен метод подбора самых оценённых фильмов");
-        return filmStorage.findAll().stream()
-                .sorted((film1, film2) -> Integer.compare(film2.getLikes().size(), film1.getLikes().size()))
-                .limit(count)
-                .collect(Collectors.toList());
+    public Collection<Film> getTopFilms(int count) {
+        log.trace("Запущен метод поиска популярных фильмов");
+        return filmStorage.getTopFilms(count);
     }
 }

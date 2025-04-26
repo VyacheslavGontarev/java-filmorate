@@ -1,7 +1,7 @@
 # java-filmorate
 Template repository for Filmorate project.
 
-![Untitled.png](../../Desktop/Untitled.png)
+![Untitled.png](https://github.com/user-attachments/assets/Untitled.png)
 
 Схема базы данных для хранения данных о фильмах и пользователях.
 Основные таблицы:

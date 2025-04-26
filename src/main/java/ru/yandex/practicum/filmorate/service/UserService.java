@@ -7,21 +7,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+//import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.FriendDbStorage;
+import ru.yandex.practicum.filmorate.storage.user.UserDbStorage;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
-    private final InMemoryUserStorage userStorage;
+    //private final InMemoryUserStorage userStorage;
+    private final UserDbStorage userStorage;
+    private final FriendDbStorage friendStorage;
 
     public Collection<User> findAll() {
-        log.trace("Запущен метод поиска пользователя");
+        log.error("Запущен метод поиска пользователя");
         return userStorage.findAll();
     }
 
@@ -32,7 +34,7 @@ public class UserService {
     }
 
     public User create(User user) {
-        log.trace("Запущен метод создания пользователя");
+        log.error("Запущен метод создания пользователя");
         return userStorage.create(user);
     }
 
@@ -49,11 +51,7 @@ public class UserService {
         if (mayBeUser.isEmpty() || mayBeFriend.isEmpty()) {
             throw new NotFoundException("Пользователь не найден.");
         }
-        User user = mayBeUser.get();
-        User friend = mayBeFriend.get();
-
-        user.getFriends().add(friendId);
-        friend.getFriends().add(userId);
+        friendStorage.addFriends(userId, friendId);
     }
 
     public void removeFriend(Long userId, Long friendId) {
@@ -64,31 +62,19 @@ public class UserService {
         if (mayBeUser.isEmpty() || mayBeFriend.isEmpty()) {
             throw new NotFoundException("Пользователь не найден.");
         }
-        User user = mayBeUser.get();
-        User friend = mayBeFriend.get();
-
-        user.getFriends().remove(friendId);
-        friend.getFriends().remove(userId);
+        friendStorage.removeFriends(userId, friendId);
     }
 
-    public Set<User> getFriends(Long userId) {
+    public Collection<User> getFriends(Long userId) {
         log.trace("Запущен метод поиска друзей пользователя");
         Optional<User> mayBeUser = userStorage.findById(userId);
         if (mayBeUser.isEmpty()) {
             throw new NotFoundException("Пользователь не найден.");
         }
-        User user = mayBeUser.get();
-        Set<Long> friendIds = user.getFriends();
-        Set<User> friends = new HashSet<>();
-        for (Long friendId : friendIds) {
-            Optional<User> friend = userStorage.findById(friendId);
-            friend.ifPresent(friends::add); // Добавляем найденного друга в набор
-        }
-
-        return friends;
+        return friendStorage.getFriends(userId);
     }
 
-    public Set<User> getCommonFriends(Long userId, Long otherUserId) {
+    public Collection<User> getCommonFriends(Long userId, Long otherUserId) {
         log.trace("Запущен метод поиска общих друзей пользователя");
         Optional<User> mayBeUser = userStorage.findById(userId);
         Optional<User> mayBeOtherUser = userStorage.findById(otherUserId);
@@ -96,18 +82,7 @@ public class UserService {
         if (mayBeUser.isEmpty() || mayBeOtherUser.isEmpty()) {
             throw new NotFoundException("Пользователь не найден.");
         }
-        User user = mayBeUser.get();
-        User otherUser = mayBeOtherUser.get();
+        return friendStorage.getCommonFriends(userId, otherUserId);
 
-        Set<Long> commonFriends = new HashSet<>(user.getFriends());
-        commonFriends.remove(otherUserId);
-        commonFriends.retainAll(otherUser.getFriends());
-        Set<User> friends = new HashSet<>();
-        for (Long friendId : commonFriends) {
-            Optional<User> friend = userStorage.findById(friendId);
-            friend.ifPresent(friends::add); // Добавляем найденного друга в набор
-        }
-
-        return friends;
     }
 }

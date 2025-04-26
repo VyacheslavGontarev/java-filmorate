@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Slf4j
+/*@Slf4j
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
 
@@ -116,4 +116,4 @@ public class InMemoryFilmStorage implements FilmStorage {
                 .orElse(0);
         return ++currentMaxId;
     }
-}
+}*/

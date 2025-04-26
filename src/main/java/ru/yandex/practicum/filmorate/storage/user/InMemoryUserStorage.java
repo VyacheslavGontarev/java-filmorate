@@ -14,17 +14,17 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class InMemoryUserStorage implements UserStorage {
+public class InMemoryUserStorage /*implements UserStorage*/ {
 
     private final Map<Long, User> users = new HashMap<>();
 
-    @Override
+    //@Override
     public Collection<User> findAll() {
         log.trace("Запущен метод поиска пользователей");
         return users.values();
     }
 
-    @Override
+    //@Override
     public Optional<User> findById(Long id) {
         log.trace("Запущен метод поиска пользователя по id");
         return users.values().stream()
@@ -32,7 +32,7 @@ public class InMemoryUserStorage implements UserStorage {
                 .findFirst();
     }
 
-    @Override
+    //@Override
     public User create(User user) {
         log.trace("Запущен метод создания пользователя");
         if (user.getEmail() == null || !user.getEmail().contains("@")) {
@@ -58,7 +58,7 @@ public class InMemoryUserStorage implements UserStorage {
         return user;
     }
 
-    @Override
+    //@Override
     public User update(User newUser) {
         log.trace("Запущен метод редактирования пользователя");
         if (newUser.getId() == null) {

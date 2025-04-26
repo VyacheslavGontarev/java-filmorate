@@ -23,11 +23,9 @@ public class FriendDbStorage {
     }
 
     public void removeFriends(long userId, long friendId) {
-       // if (checkUserInFriends(userId, friendId)) {
             String query = "DELETE FROM friendship " +
                     "WHERE following_user_id = ? AND followed_user_id = ?";
             jdbc.update(query, userId, friendId);
-      //  }
     }
 
     public Collection<User> getFriends(long userId) {

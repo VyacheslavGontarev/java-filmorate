@@ -27,7 +27,7 @@ public class GenreDbStorage {
         try {
             String query = "SELECT * FROM genre WHERE genre_id = ?;";
             return Optional.ofNullable(jdbc.queryForObject(query, new GenreRowMapper(), id));
-        } catch(EmptyResultDataAccessException ignored) {
+        } catch (EmptyResultDataAccessException ignored) {
             return Optional.empty();
         }
     }

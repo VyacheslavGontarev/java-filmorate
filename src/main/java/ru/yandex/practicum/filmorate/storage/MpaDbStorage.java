@@ -21,7 +21,7 @@ public class MpaDbStorage {
         try {
         String sqlQuery = "SELECT * FROM mpa WHERE mpa_id = ?";
         return  Optional.ofNullable(jdbc.queryForObject(sqlQuery, new MpaRowMapper(), id));
-    } catch(EmptyResultDataAccessException ignored) {
+    } catch (EmptyResultDataAccessException ignored) {
         return Optional.empty();
     }
     }

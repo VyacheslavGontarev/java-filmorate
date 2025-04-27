@@ -22,12 +22,3 @@ USING (VALUES
 ON target.mpa_id = source.mpa_id
 WHEN NOT MATCHED THEN
 INSERT (mpa_id, name) VALUES (source.mpa_id, source.name);
-
-MERGE INTO friendship_status AS target
-USING (VALUES
-    (1, 'Pending'),
-    (2, 'Accepted')
-) AS source (id, status)
-ON target.id = source.id
-WHEN NOT MATCHED THEN
-INSERT (id, status) VALUES (source.id, source.status);

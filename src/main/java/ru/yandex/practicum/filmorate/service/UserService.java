@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class UserService {
-    //private final InMemoryUserStorage userStorage;
     private final UserDbStorage userStorage;
     private final FriendDbStorage friendStorage;
 

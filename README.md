@@ -2,7 +2,8 @@
 Template repository for Filmorate project.
 
 
-![Untitled.png](../../Desktop/Untitled.png)
+![Untitled](https://github.com/user-attachments/assets/f966e364-0401-48f4-95a8-6f63a9693cd1)
+
 
 
 Схема базы данных для хранения данных о фильмах и пользователях.

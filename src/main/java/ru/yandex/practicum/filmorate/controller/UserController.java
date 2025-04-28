@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import ru.yandex.practicum.filmorate.service.UserService;
 
 import java.util.Collection;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
@@ -18,7 +17,7 @@ public class UserController {
 
     @GetMapping
     public Collection<User> findAll() {
-        log.trace("Запущен метод поиска пользователя");
+        log.error("Запущен метод поиска пользователя");
         return userService.findAll();
     }
 
@@ -31,7 +30,7 @@ public class UserController {
 
     @PostMapping
     public User create(@RequestBody User user) {
-        log.trace("Запущен метод создания пользователя");
+        log.error("Запущен метод создания пользователя");
         return userService.create(user);
     }
 
@@ -54,13 +53,13 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/friends")
-    public Set<User> getFriends(@PathVariable Long userId) {
+    public Collection<User> getFriends(@PathVariable Long userId) {
         log.trace("Запущен метод поиска друзей пользователя");
         return userService.getFriends(userId);
     }
 
     @GetMapping("/{userId}/friends/common/{otherUserId}")
-    public Set<User> getCommonFriends(@PathVariable Long userId, @PathVariable Long otherUserId) {
+    public Collection<User> getCommonFriends(@PathVariable Long userId, @PathVariable Long otherUserId) {
         log.trace("Запущен метод поиска общих друзей пользователей");
         return userService.getCommonFriends(userId, otherUserId);
     }

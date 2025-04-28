@@ -1,7 +1,9 @@
 # java-filmorate
 Template repository for Filmorate project.
 
-![Untitled](https://github.com/user-attachments/assets/8627d4ca-5fe9-4964-a4b4-139c4c49b93f)
+
+![Untitled](https://github.com/user-attachments/assets/f966e364-0401-48f4-95a8-6f63a9693cd1)
+
 
 
 Схема базы данных для хранения данных о фильмах и пользователях.
@@ -13,7 +15,6 @@ Template repository for Filmorate project.
 - `film_genre` - таблица связи фильмов и жанров.
 - `mpa` - таблица возрастных ограничений.
 - `friendship` - таблица дружбы пользователей.
-- `friendship_status` - вспомогательная таблица статусов дружбы.
 - `liked_films` - таблица лайков фильмов пользователями.
 
 Примеры запросов:
